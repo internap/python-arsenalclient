@@ -32,7 +32,7 @@ from six.moves import http_client
 LOG = logging.getLogger(__name__)
 USER_AGENT = 'python-arsenalclient'
 CHUNKSIZE = 1024 * 64  # 64kB
-
+DEFAULT_VER = '1'
 
 DEFAULT_MAX_RETRIES = 5
 DEFAULT_RETRY_INTERVAL = 2

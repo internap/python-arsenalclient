@@ -20,7 +20,7 @@ class Resource(object):
     """Resource class
 
     This class is used to manage the various fields that a resource (e.g.
-    Chassis, Node, Port) contains.  An individual field consists of a
+    Server, PDU, Switch) contains.  An individual field consists of a
     'field_id' (key) and a 'label' (value).  The caller only provides the
     'field_ids' when instantiating the object.
 
@@ -79,7 +79,7 @@ class Resource(object):
         return self._sort_labels
 
 
-# Chassis
+# Resource
 DETAILED_RESOURCE = Resource(
     ['uuid',
      'description',
