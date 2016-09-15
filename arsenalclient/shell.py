@@ -172,9 +172,10 @@ def main():
     except KeyboardInterrupt:
         print(_("... terminating arsenal client"), file=sys.stderr)
         return 130
-    except Exception as e:
-        print(encodeutils.safe_encode(six.text_type(e)), file=sys.stderr)
-        return 1
+    # NOTE(lindycoder): Show me the real exception for now pliiiiize
+    # except Exception as e:
+    #     print(encodeutils.safe_encode(six.text_type(e)), file=sys.stderr)
+    #     return 1
 
 if __name__ == "__main__":
     sys.exit(main())
