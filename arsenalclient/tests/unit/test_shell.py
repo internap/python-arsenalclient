@@ -58,3 +58,17 @@ class ShellTest(utils.BaseTestCase):
                 self.assertThat(help_text,
                                 matchers.MatchesRegex(r,
                                                       self.re_options))
+
+    def test_help_on_subcommand(self):
+        required = [
+            '.*?^usage: arsenal resource-show',
+            ".*?^Show detailed information about a resource",
+        ]
+        argstrings = [
+            'help resource-show',
+        ]
+        for argstr in argstrings:
+            help_text = self.shell(argstr)
+            for r in required:
+                self.assertThat(help_text,
+                                matchers.MatchesRegex(r, self.re_options))

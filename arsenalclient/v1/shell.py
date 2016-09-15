@@ -12,8 +12,10 @@
 
 
 from arsenalclient.common import utils
+from arsenalclient.v1 import resource_shell
 
 COMMAND_MODULES = [
+    resource_shell,
 ]
 
 
