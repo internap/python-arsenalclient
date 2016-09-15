@@ -249,7 +249,7 @@ class HTTPClient():
         # Read body into string if it isn't obviously image data
         body_str = None
         if resp.headers.get('Content-Type') != 'application/octet-stream':
-            body_str = ''.join([chunk for chunk in body_iter])
+            body_str = ''.join([chunk.decode() for chunk in body_iter])
             self.log_http_response(resp, body_str)
             body_iter = six.StringIO(body_str)
         else:
