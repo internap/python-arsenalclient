@@ -9,6 +9,7 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
+from arsenalclient.common import utils
 
 
 def get_client(arsenal_url=None, max_retries=None,
@@ -28,8 +29,10 @@ def get_client(arsenal_url=None, max_retries=None,
     }
     endpoint = arsenal_url
 
-    return Client(endpoint, **kwargs)
+    return Client('1', endpoint, **kwargs)
 
-def Client(*args, **kwargs):
+
+def Client(version, *args, **kwargs):
+    module = utils.import_versioned_module(version, 'client')
     client_class = getattr(module, 'Client')
     return client_class(*args, **kwargs)

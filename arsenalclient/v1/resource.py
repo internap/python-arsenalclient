@@ -22,12 +22,12 @@ from arsenalclient import exc
 
 class Resource(base.Resource):
     def __repr__(self):
-        return "<Chassis %s>" % self._info
+        return "<Resource %s>" % self._info
 
 
 class ResourceManager(base.CreateManager):
     resource_class = Resource
-    _resource_name = 'chassis'
+    _resource_name = 'resources'
     _creation_attributes = ['description', 'extra', 'uuid']
 
     def list(self, marker=None, limit=None, sort_key=None,
@@ -52,7 +52,7 @@ class ResourceManager(base.CreateManager):
                          default) or 'desc'.
 
         :param detail: Optional, boolean whether to return detailed information
-                       about chassis.
+                       about resource.
 
         :param fields: Optional, a list with a specified set of fields
                        of the resource to be returned. Can not be used

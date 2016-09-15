@@ -119,9 +119,9 @@ class ArsenalShell(object):
             return 0
 
         if not args.arsenal_url:
-            raise exc.CommandError(_("@CHANGEME You must provide a username via "
-                                         "either --os-username or via "
-                                         "env[OS_USERNAME]"))
+            raise exc.CommandError(_("You must provide the arsenal url via "
+                                         "either --arsenal_url or via "
+                                         "env[ARSENAL_URL]"))
 
         if args.max_retries < 0:
             raise exc.CommandError(_("You must provide value >= 0 for "
@@ -130,13 +130,12 @@ class ArsenalShell(object):
             raise exc.CommandError(_("You must provide value >= 1 for "
                                      "--retry-interval"))
         client_args = (
-            'arsenal_url', 'max_retries', 'retry_interval',
-            'timeout', 'insecure'
+            'arsenal_url', 'max_retries', 'retry_interval'
         )
         kwargs = {}
         for key in client_args:
             kwargs[key] = getattr(args, key)
-        client = arsclient.get_client()
+        client = arsclient.get_client(**kwargs)
 
         try:
             args.func(client, args)
