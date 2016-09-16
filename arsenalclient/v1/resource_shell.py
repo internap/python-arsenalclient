@@ -116,31 +116,21 @@ def do_resource_list(cc, args):
     metavar='<description>',
     help='Description of the resource.')
 @cliutils.arg(
-    '-i', '--ironic_driver',
-    metavar="<ironic_driver>",
+    '-e', '--extra',
+    metavar="<key=value>",
+    action='append',
     help="Record arbitrary key/value metadata. "
          "Can be specified multiple times.")
-@cliutils.arg(
-    '-c', '--cpu',
-    metavar="<cpu>",
-    help="CPU Count")
-@cliutils.arg(
-    '-r', '--ram',
-    metavar="<ram>",
-    help="Memory capacity")
-@cliutils.arg(
-    '-s', '--disk',
-    metavar="<disk>",
-    help="Disk capacity")
 @cliutils.arg(
     '-u', '--uuid',
     metavar='<uuid>',
     help="UUID of the resource.")
 def do_resource_create(cc, args):
     """Create a new resource."""
-    field_list = ['description', 'ironic_driver', 'cpu', 'ram', 'disk', 'uuid']
+    field_list = ['description', 'extra', 'uuid']
     fields = dict((k, v) for (k, v) in vars(args).items()
                   if k in field_list and not (v is None))
+    fields = utils.args_array_to_dict(fields, 'extra')
     resource = cc.resource.create(**fields)
 
     data = dict([(f, getattr(resource, f, '')) for f in field_list])

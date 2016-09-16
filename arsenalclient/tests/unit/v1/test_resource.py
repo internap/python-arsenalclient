@@ -24,12 +24,12 @@ import arsenalclient.v1.resource
 
 RESOURCE = {'id': 42,
            'uuid': 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee',
-           'ironic_driver': 'unestring',
+           'extra': {},
            'description': 'data-center-1-resource'}
 
 RESOURCE2 = {'id': 43,
             'uuid': 'eeeeeeee-dddd-cccc-bbbb-aaaaaaaaaaaa',
-            'ironic_driver': 'unestring',
+            'extra': {},
             'description': 'data-center-1-resource'}
 
 CREATE_RESOURCE = copy.deepcopy(RESOURCE)
@@ -62,7 +62,7 @@ fake_responses = {
             {"resource": [RESOURCE]},
         ),
     },
-    '/v1/resources/?fields=uuid,ironic_driver':
+    '/v1/resources/?fields=uuid,extra':
     {
         'GET': (
             {},
@@ -211,16 +211,16 @@ class ResourceManagerTest(testtools.TestCase):
         self.assertEqual(1, len(resource))
 
     def test_resource_list_fields(self):
-        nodes = self.mgr.list(fields=['uuid', 'ironic_driver'])
+        nodes = self.mgr.list(fields=['uuid', 'extra'])
         expect = [
-            ('GET', '/v1/resources/?fields=uuid,ironic_driver', {}, None),
+            ('GET', '/v1/resources/?fields=uuid,extra', {}, None),
         ]
         self.assertEqual(expect, self.api.calls)
         self.assertEqual(1, len(nodes))
 
     def test_resource_list_detail_and_fields_fail(self):
         self.assertRaises(exc.InvalidAttribute, self.mgr.list,
-                          detail=True, fields=['uuid', 'ironic_driver'])
+                          detail=True, fields=['uuid', 'extra'])
 
     def test_resource_show(self):
         resource = self.mgr.get(RESOURCE['uuid'])
