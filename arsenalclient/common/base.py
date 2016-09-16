@@ -215,6 +215,8 @@ class CreateManager(Manager):
                  'attrs': '","'.join(invalid)})
         url = self._path()
         resp, body = self.api.json_request('POST', url, body=new)
+        if resp.headers['location']:
+            resp, body = self.api.json_request('GET', resp.headers['location'])
         if body:
             return self.resource_class(self, body)
 

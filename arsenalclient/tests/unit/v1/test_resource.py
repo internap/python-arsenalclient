@@ -53,8 +53,8 @@ fake_responses = {
             {"resource": [RESOURCE]},
         ),
         'POST': (
-            {},
-            CREATE_RESOURCE,
+            {'location': '/v1/resources/detail'},
+            {}
         ),
     },
     '/v1/resources/detail':
@@ -247,6 +247,7 @@ class ResourceManagerTest(testtools.TestCase):
         resource = self.mgr.create(**CREATE_RESOURCE)
         expect = [
             ('POST', '/v1/resources', {}, CREATE_RESOURCE),
+            ('GET', '/v1/resources/detail', {}, None),
         ]
         self.assertEqual(expect, self.api.calls)
         self.assertTrue(resource)
@@ -255,6 +256,16 @@ class ResourceManagerTest(testtools.TestCase):
         resource = self.mgr.create(**CREATE_WITH_UUID)
         expect = [
             ('POST', '/v1/resources', {}, CREATE_WITH_UUID),
+            ('GET', '/v1/resources/detail', {}, None),
+        ]
+        self.assertEqual(expect, self.api.calls)
+        self.assertTrue(resource)
+
+    def test_create_with_return(self):
+        resource = self.mgr.create(**CREATE_WITH_UUID)
+        expect = [
+            ('POST', '/v1/resources', {}, CREATE_WITH_UUID),
+            ('GET', '/v1/resources/detail', {}, None),
         ]
         self.assertEqual(expect, self.api.calls)
         self.assertTrue(resource)
