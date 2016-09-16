@@ -45,7 +45,7 @@ class ResourceShellTest(utils.BaseTestCase):
         with mock.patch.object(cliutils, 'print_dict', fake_print_dict):
             resource = object()
             r_shell._print_resource_show(resource)
-        exp = ['created_at', 'description', 'extra', 'updated_at', 'uuid']
+        exp = ['created_at', 'description', 'ironic_driver', 'updated_at', 'uuid']
         act = actual.keys()
         self.assertEqual(sorted(exp), sorted(act))
 
@@ -196,23 +196,12 @@ class ResourceShellTest(utils.BaseTestCase):
     def test_do_resource_create_valid_field(self):
         client_mock = mock.MagicMock()
         args = mock.MagicMock()
-        args.extra = ["key1=val1", "key2=val2"]
+        args.ironic_driver = "driver"
         args.description = 'desc'
         args.json = False
         r_shell.do_resource_create(client_mock, args)
-        client_mock.resource.create.assert_called_once_with(extra={
-                                                           'key1': 'val1',
-                                                           'key2': 'val2'},
+        client_mock.resource.create.assert_called_once_with(ironic_driver='driver',
                                                            description='desc')
-
-    def test_do_resource_create_wrong_extra_field(self):
-        client_mock = mock.MagicMock()
-        args = mock.MagicMock()
-        args.extra = ["foo"]
-        args.description = 'desc'
-        args.json = False
-        self.assertRaises(exceptions.CommandError,
-                          r_shell.do_resource_create, client_mock, args)
 
     def test_do_resource_delete(self):
         client_mock = mock.MagicMock()
