@@ -24,11 +24,13 @@ import arsenalclient.v1.resource
 
 RESOURCE = {'id': 42,
            'uuid': 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee',
+           'type': 'server',
            'attributes': {},
            'description': 'data-center-1-resource'}
 
 RESOURCE2 = {'id': 43,
             'uuid': 'eeeeeeee-dddd-cccc-bbbb-aaaaaaaaaaaa',
+            'type': 'pdu',
             'attributes': {},
             'description': 'data-center-1-resource'}
 

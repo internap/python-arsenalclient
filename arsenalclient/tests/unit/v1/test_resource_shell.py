@@ -45,7 +45,7 @@ class ResourceShellTest(utils.BaseTestCase):
         with mock.patch.object(cliutils, 'print_dict', fake_print_dict):
             resource = object()
             r_shell._print_resource_show(resource)
-        exp = ['created_at', 'description', 'attributes', 'updated_at', 'uuid']
+        exp = ['created_at', 'description', 'type', 'attributes', 'updated_at', 'uuid']
         act = actual.keys()
         self.assertEqual(sorted(exp), sorted(act))
 
@@ -193,21 +193,34 @@ class ResourceShellTest(utils.BaseTestCase):
         r_shell.do_resource_create(client_mock, args)
         client_mock.resource.create.assert_called_once_with(uuid=args.uuid)
 
+    def test_do_resource_create_valid_type(self):
+        client_mock = mock.MagicMock()
+        args = mock.MagicMock()
+        args.type = 'switch'
+        args.description = 'desc'
+        args.json = False
+        r_shell.do_resource_create(client_mock, args)
+        client_mock.resource.create.assert_called_once_with(type='switch',
+                                                           description='desc')
+
     def test_do_resource_create_valid_field(self):
         client_mock = mock.MagicMock()
         args = mock.MagicMock()
+        args.type = 'server'
         args.attributes = ["key1=val1", "key2=val2"]
         args.description = 'desc'
         args.json = False
         r_shell.do_resource_create(client_mock, args)
-        client_mock.resource.create.assert_called_once_with(attributes={
-                                                           'key1': 'val1',
-                                                           'key2': 'val2'},
+        client_mock.resource.create.assert_called_once_with(type='server',
+                                                            attributes={
+                                                                'key1': 'val1',
+                                                                'key2': 'val2'},
                                                            description='desc')
 
     def test_do_resource_create_wrong_attributes_field(self):
         client_mock = mock.MagicMock()
         args = mock.MagicMock()
+        args.type = 'pdu'
         args.attributes = ["foo"]
         args.description = 'desc'
         args.json = False
@@ -234,6 +247,7 @@ class ResourceShellTest(utils.BaseTestCase):
         args = mock.MagicMock()
         args.resource = 'resource_uuid'
         args.op = 'add'
+        args.type = 'switch'
         args.attributes = [['arg1=val1', 'arg2=val2']]
         args.json = False
         r_shell.do_resource_update(client_mock, args)
@@ -246,6 +260,7 @@ class ResourceShellTest(utils.BaseTestCase):
         args = mock.MagicMock()
         args.resource = 'resource_uuid'
         args.op = 'foo'
+        args.type = ''
         args.attributes = [['arg1=val1', 'arg2=val2']]
         self.assertRaises(exceptions.CommandError,
                           r_shell.do_resource_update,

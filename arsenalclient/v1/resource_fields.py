@@ -32,7 +32,8 @@ class Resource(object):
     FIELDS = {
         'created_at': 'Created At',
         'description': 'Description',
-        'attributes': 'attributes',
+        'attributes': 'Attributes',
+        'type': 'Type',
         'updated_at': 'Updated At',
         'uuid': 'UUID',
     }
@@ -86,9 +87,10 @@ DETAILED_RESOURCE = Resource(
      'created_at',
      'updated_at',
      'attributes',
+     'type',
      ],
     sort_excluded=['attributes'])
 RESOURCE = Resource(
     ['uuid',
      'description',
-     ])
+    ])

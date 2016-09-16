@@ -116,6 +116,10 @@ def do_resource_list(cc, args):
     metavar='<description>',
     help='Description of the resource.')
 @cliutils.arg(
+    '-t', '--type',
+    metavar="<type>",
+    help='Type of the resource.')
+@cliutils.arg(
     '-a', '--attributes',
     metavar="<key=value>",
     action='append',
@@ -127,7 +131,7 @@ def do_resource_list(cc, args):
     help="UUID of the resource.")
 def do_resource_create(cc, args):
     """Create a new resource."""
-    field_list = ['description', 'attributes', 'uuid']
+    field_list = ['description', 'type', 'attributes', 'uuid']
     fields = dict((k, v) for (k, v) in vars(args).items()
                   if k in field_list and not (v is None))
     fields = utils.args_array_to_dict(fields, 'attributes')
