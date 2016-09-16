@@ -32,7 +32,10 @@ class Resource(object):
     FIELDS = {
         'created_at': 'Created At',
         'description': 'Description',
-        'extra': 'Extra',
+        'ironic_driver': 'Ironic Driver',
+        'cpu': 'CPU',
+        'ram': 'Memory Capacity',
+        'disk': 'Disk Capacity',
         'updated_at': 'Updated At',
         'uuid': 'UUID',
     }
@@ -83,12 +86,15 @@ class Resource(object):
 DETAILED_RESOURCE = Resource(
     ['uuid',
      'description',
+     'ironic_driver',
      'created_at',
      'updated_at',
-     'extra',
      ],
-    sort_excluded=['extra'])
+    )
 RESOURCE = Resource(
     ['uuid',
      'description',
+     'cpu',
+     'ram',
+     'disk'
      ])
