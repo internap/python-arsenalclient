@@ -28,7 +28,7 @@ class Resource(base.Resource):
 class ResourceManager(base.CreateManager):
     resource_class = Resource
     _resource_name = 'resources'
-    _creation_attributes = ['description', 'extra', 'uuid']
+    _creation_attributes = ['description', 'attributes', 'uuid']
 
     def list(self, marker=None, limit=None, sort_key=None,
              sort_dir=None, detail=False, fields=None):
