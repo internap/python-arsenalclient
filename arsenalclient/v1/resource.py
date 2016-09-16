@@ -78,9 +78,9 @@ class ResourceManager(base.CreateManager):
             path += '?' + '&'.join(filters)
 
         if limit is None:
-            return self._list(self._path(path), "resource")
+            return self._list(self._path(path), "resources")
         else:
-            return self._list_pagination(self._path(path), "resource",
+            return self._list_pagination(self._path(path), "resources",
                                          limit=limit)
 
     def get(self, resource_id, fields=None):

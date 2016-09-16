@@ -50,7 +50,7 @@ fake_responses = {
     {
         'GET': (
             {},
-            {"resource": [RESOURCE]},
+            {"resources": [RESOURCE]},
         ),
         'POST': (
             {},
@@ -61,14 +61,14 @@ fake_responses = {
     {
         'GET': (
             {},
-            {"resource": [RESOURCE]},
+            {"resources": [RESOURCE]},
         ),
     },
     '/v1/resources/?fields=uuid,attributes':
     {
         'GET': (
             {},
-            {"resource": [RESOURCE]},
+            {"resources": [RESOURCE]},
         ),
     },
     '/v1/resources/%s' % RESOURCE['uuid']:
@@ -100,7 +100,7 @@ fake_responses_pagination = {
     {
         'GET': (
             {},
-            {"resource": [RESOURCE],
+            {"resources": [RESOURCE],
              "next": "http://127.0.0.1:6385/v1/resources/?limit=1"}
         ),
     },
@@ -108,14 +108,14 @@ fake_responses_pagination = {
     {
         'GET': (
             {},
-            {"resource": [RESOURCE2]}
+            {"resources": [RESOURCE2]}
         ),
     },
     '/v1/resources/?marker=%s' % RESOURCE['uuid']:
     {
         'GET': (
             {},
-            {"resource": [RESOURCE2]}
+            {"resources": [RESOURCE2]}
         ),
     },
 }
@@ -125,14 +125,14 @@ fake_responses_sorting = {
     {
         'GET': (
             {},
-            {"resource": [RESOURCE2]}
+            {"resources": [RESOURCE2]}
         ),
     },
     '/v1/resources/?sort_dir=desc':
     {
         'GET': (
             {},
-            {"resource": [RESOURCE2]}
+            {"resources": [RESOURCE2]}
         ),
     },
 }
