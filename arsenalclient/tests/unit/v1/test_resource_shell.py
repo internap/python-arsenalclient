@@ -45,7 +45,7 @@ class ResourceShellTest(utils.BaseTestCase):
         with mock.patch.object(cliutils, 'print_dict', fake_print_dict):
             resource = object()
             r_shell._print_resource_show(resource)
-        exp = ['created_at', 'description', 'extra', 'updated_at', 'uuid']
+        exp = ['created_at', 'description', 'attributes', 'updated_at', 'uuid']
         act = actual.keys()
         self.assertEqual(sorted(exp), sorted(act))
 
@@ -110,7 +110,7 @@ class ResourceShellTest(utils.BaseTestCase):
 
     def test_do_resource_list_wrong_sort_key(self):
         client_mock = mock.MagicMock()
-        args = self._get_client_mock_args(sort_key='extra',
+        args = self._get_client_mock_args(sort_key='attributes',
                                           detail=False)
         self.assertRaises(exceptions.CommandError,
                           r_shell.do_resource_list,
@@ -128,7 +128,7 @@ class ResourceShellTest(utils.BaseTestCase):
 
     def test_do_resource_list_detail_wrong_sort_key(self):
         client_mock = mock.MagicMock()
-        args = self._get_client_mock_args(sort_key='extra',
+        args = self._get_client_mock_args(sort_key='attributes',
                                           detail=True)
 
         self.assertRaises(exceptions.CommandError,
@@ -196,19 +196,19 @@ class ResourceShellTest(utils.BaseTestCase):
     def test_do_resource_create_valid_field(self):
         client_mock = mock.MagicMock()
         args = mock.MagicMock()
-        args.extra = ["key1=val1", "key2=val2"]
+        args.attributes = ["key1=val1", "key2=val2"]
         args.description = 'desc'
         args.json = False
         r_shell.do_resource_create(client_mock, args)
-        client_mock.resource.create.assert_called_once_with(extra={
+        client_mock.resource.create.assert_called_once_with(attributes={
                                                            'key1': 'val1',
                                                            'key2': 'val2'},
                                                            description='desc')
 
-    def test_do_resource_create_wrong_extra_field(self):
+    def test_do_resource_create_wrong_attributes_field(self):
         client_mock = mock.MagicMock()
         args = mock.MagicMock()
-        args.extra = ["foo"]
+        args.attributes = ["foo"]
         args.description = 'desc'
         args.json = False
         self.assertRaises(exceptions.CommandError,
