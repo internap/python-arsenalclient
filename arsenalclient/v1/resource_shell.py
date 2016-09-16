@@ -120,6 +120,12 @@ def do_resource_list(cc, args):
     metavar="<type>",
     help='Type of the resource.')
 @cliutils.arg(
+    '-r', '--relations',
+    metavar="<key=value>",
+    action='append',
+    help="Record relations to other resources. "
+         "Can be specified multiple times.")
+@cliutils.arg(
     '-a', '--attributes',
     metavar="<key=value>",
     action='append',
@@ -131,9 +137,10 @@ def do_resource_list(cc, args):
     help="UUID of the resource.")
 def do_resource_create(cc, args):
     """Create a new resource."""
-    field_list = ['description', 'type', 'attributes', 'uuid']
+    field_list = ['description', 'type', 'relations', 'attributes', 'uuid']
     fields = dict((k, v) for (k, v) in vars(args).items()
                   if k in field_list and not (v is None))
+    fields = utils.args_array_to_dict(fields, 'relations')
     fields = utils.args_array_to_dict(fields, 'attributes')
     resource = cc.resource.create(**fields)
 

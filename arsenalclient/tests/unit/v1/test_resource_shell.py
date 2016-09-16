@@ -45,7 +45,7 @@ class ResourceShellTest(utils.BaseTestCase):
         with mock.patch.object(cliutils, 'print_dict', fake_print_dict):
             resource = object()
             r_shell._print_resource_show(resource)
-        exp = ['created_at', 'description', 'type', 'attributes', 'updated_at', 'uuid']
+        exp = ['created_at', 'description', 'type', 'relations', 'attributes', 'updated_at', 'uuid']
         act = actual.keys()
         self.assertEqual(sorted(exp), sorted(act))
 
