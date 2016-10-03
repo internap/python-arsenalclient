@@ -2,6 +2,6 @@
 Usage
 ========
 
-To use python-arsenalclient in a project::
+To use python-cellarclient in a project::
 
-    import arsenalclient
+    import cellarclient

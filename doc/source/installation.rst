@@ -4,9 +4,9 @@ Installation
 
 At the command line::
 
-    $ pip install python-arsenalclient
+    $ pip install python-cellarclient
 
 Or, if you have virtualenvwrapper installed::
 
-    $ mkvirtualenv python-arsenalclient
-    $ pip install python-arsenalclient
+    $ mkvirtualenv python-cellarclient
+    $ pip install python-cellarclient

@@ -16,11 +16,11 @@ import mock
 
 from oslo_utils import uuidutils
 
-from arsenalclient.common.apiclient import exceptions
-from arsenalclient.common import cliutils
-from arsenalclient.common import utils as commonutils
-from arsenalclient.tests.unit import utils
-import arsenalclient.v1.resource_shell as r_shell
+from cellarclient.common.apiclient import exceptions
+from cellarclient.common import cliutils
+from cellarclient.common import utils as commonutils
+from cellarclient.tests.unit import utils
+import cellarclient.v1.resource_shell as r_shell
 
 
 class ResourceShellTest(utils.BaseTestCase):

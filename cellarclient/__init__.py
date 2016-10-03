@@ -16,4 +16,4 @@ import pbr.version
 
 
 __version__ = pbr.version.VersionInfo(
-    'arsenalclient').version_string()
+    'cellarclient').version_string()

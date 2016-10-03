@@ -1,4 +1,4 @@
-python-arsenalclient Style Commandments
+python-cellarclient Style Commandments
 ===============================================
 
 Read the OpenStack Style Commandments http://docs.openstack.org/developer/hacking/

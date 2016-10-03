@@ -13,9 +13,9 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from arsenalclient.common import cliutils
-from arsenalclient.common import utils
-from arsenalclient.v1 import resource_fields as res_fields
+from cellarclient.common import cliutils
+from cellarclient.common import utils
+from cellarclient.v1 import resource_fields as res_fields
 
 
 def _print_resource_show(resource, fields=None, json=False):
@@ -58,7 +58,7 @@ def do_resource_show(cc, args):
     type=int,
     help='Maximum number of resource to return per request, '
          '0 for no limit. Default is the maximum number used '
-         'by the arsenal API Service.')
+         'by the cellar API Service.')
 @cliutils.arg(
     '--marker',
     metavar='<resource>',

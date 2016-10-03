@@ -11,8 +11,8 @@
 #    under the License.
 
 
-from arsenalclient.common import utils
-from arsenalclient.v1 import resource_shell
+from cellarclient.common import utils
+from cellarclient.v1 import resource_shell
 
 COMMAND_MODULES = [
     resource_shell,

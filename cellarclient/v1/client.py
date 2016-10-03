@@ -12,28 +12,28 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
-from arsenalclient.v1 import resource
-from arsenalclient.common import filecache
-from arsenalclient.common import http
-from arsenalclient.common.http import DEFAULT_VER
-from arsenalclient.common.i18n import _
-from arsenalclient import exc
+from cellarclient.v1 import resource
+from cellarclient.common import filecache
+from cellarclient.common import http
+from cellarclient.common.http import DEFAULT_VER
+from cellarclient.common.i18n import _
+from cellarclient import exc
 
 
 class Client(object):
-    """Client for the Arsenal v1 API.
+    """Client for the Cellar v1 API.
 
-    :param string endpoint: A user-supplied endpoint URL for the arsenal
+    :param string endpoint: A user-supplied endpoint URL for the cellar
                             service.
     :param integer timeout: Allows customization of the timeout for client
                             http requests. (optional)
     """
 
     def __init__(self, endpoint=None, *args, **kwargs):
-        """Initialize a new client for the Arsenal v1 API."""
+        """Initialize a new client for the Cellar v1 API."""
         if not endpoint:
             raise exc.EndpointException(
-                _("Must provide 'endpoint' if os_arsenal_api_version "
+                _("Must provide 'endpoint' if os_cellar_api_version "
                   "isn't specified"))
 
         # If the user didn't specify a version, use a cached version if
@@ -42,10 +42,10 @@ class Client(object):
         saved_version = filecache.retrieve_data(host=host, port=netport)
         if saved_version:
             kwargs['api_version_select_state'] = "cached"
-            kwargs['os_arsenal_api_version'] = saved_version
+            kwargs['os_cellar_api_version'] = saved_version
         else:
             kwargs['api_version_select_state'] = "default"
-            kwargs['os_arsenal_api_version'] = DEFAULT_VER
+            kwargs['os_cellar_api_version'] = DEFAULT_VER
 
         self.http_client = http._construct_http_client(
             endpoint, *args, **kwargs)

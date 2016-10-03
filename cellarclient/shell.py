@@ -11,7 +11,7 @@
 #    under the License.
 
 """
-Command-line interface to the Arsenal datatcenter API.
+Command-line interface to the Cellar datatcenter API.
 """
 
 from __future__ import print_function
@@ -20,25 +20,25 @@ import argparse
 import sys
 
 import six
-from arsenalclient import client as arsclient
-from arsenalclient import exc
-from arsenalclient.common import cliutils
-from arsenalclient.common import http
-from arsenalclient.common import utils
-from arsenalclient.common.i18n import _
+from cellarclient import client as arsclient
+from cellarclient import exc
+from cellarclient.common import cliutils
+from cellarclient.common import http
+from cellarclient.common import utils
+from cellarclient.common.i18n import _
 from oslo_utils import encodeutils
 
 
 LATEST_API_VERSION = ('1', 'latest')
 
 
-class ArsenalShell(object):
+class CellarShell(object):
 
     def get_base_parser(self):
         parser = argparse.ArgumentParser(
-            prog='arsenal',
+            prog='cellar',
             description=__doc__.strip(),
-            epilog=_('See "arsenal help COMMAND" '
+            epilog=_('See "cellar help COMMAND" '
                      'for help on a specific command.'),
             add_help=False,
             formatter_class=HelpFormatter,
@@ -59,11 +59,11 @@ class ArsenalShell(object):
                             default=False, action="store_true",
                             help=_('Print more verbose output'))
 
-        parser.add_argument('--arsenal-url',
+        parser.add_argument('--cellar-url',
                             default=cliutils.env('ARSENAL_URL'),
                             help=_('Defaults to env[ARSENAL_URL]'))
 
-        parser.add_argument('--arsenal_url',
+        parser.add_argument('--cellar_url',
                             help=argparse.SUPPRESS)
 
         msg = _('Maximum number of retries in case of conflict error '
@@ -118,9 +118,9 @@ class ArsenalShell(object):
             self.do_help(args)
             return 0
 
-        if not args.arsenal_url:
-            raise exc.CommandError(_("You must provide the arsenal url via "
-                                         "either --arsenal_url or via "
+        if not args.cellar_url:
+            raise exc.CommandError(_("You must provide the cellar url via "
+                                         "either --cellar_url or via "
                                          "env[ARSENAL_URL]"))
 
         if args.max_retries < 0:
@@ -130,7 +130,7 @@ class ArsenalShell(object):
             raise exc.CommandError(_("You must provide value >= 1 for "
                                      "--retry-interval"))
         client_args = (
-            'arsenal_url', 'max_retries', 'retry_interval'
+            'cellar_url', 'max_retries', 'retry_interval'
         )
         kwargs = {}
         for key in client_args:
@@ -168,9 +168,9 @@ class HelpFormatter(argparse.HelpFormatter):
 
 def main():
     try:
-        ArsenalShell().main(sys.argv[1:])
+        CellarShell().main(sys.argv[1:])
     except KeyboardInterrupt:
-        print(_("... terminating arsenal client"), file=sys.stderr)
+        print(_("... terminating cellar client"), file=sys.stderr)
         return 130
     # NOTE(lindycoder): Show me the real exception for now pliiiiize
     # except Exception as e:

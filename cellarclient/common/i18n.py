@@ -15,7 +15,7 @@
 
 import oslo_i18n
 
-_translators = oslo_i18n.TranslatorFactory(domain='arsenalclient')
+_translators = oslo_i18n.TranslatorFactory(domain='cellarclient')
 
 # The primary translation function using the well-known name "_"
 _ = _translators.primary

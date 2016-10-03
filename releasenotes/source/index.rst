@@ -1,5 +1,5 @@
 ============================================
- arsenalclient Release Notes
+ cellarclient Release Notes
 ============================================
 
 .. toctree::

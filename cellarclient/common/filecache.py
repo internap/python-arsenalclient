@@ -20,17 +20,17 @@ import os
 import appdirs
 import dogpile.cache
 
-from arsenalclient.common.i18n import _LW
+from cellarclient.common.i18n import _LW
 
 LOG = logging.getLogger(__name__)
 
 AUTHOR = 'openstack'
-PROGNAME = 'python-arsenalclient'
+PROGNAME = 'python-cellarclient'
 
 CACHE = None
 CACHE_DIR = appdirs.user_cache_dir(PROGNAME, AUTHOR)
 CACHE_EXPIRY_ENV_VAR = 'ARSENALCLIENT_CACHE_EXPIRY'  # environment variable
-CACHE_FILENAME = os.path.join(CACHE_DIR, 'arsenal-api-version.dbm')
+CACHE_FILENAME = os.path.join(CACHE_DIR, 'cellar-api-version.dbm')
 DEFAULT_EXPIRY = 300  # seconds
 
 
@@ -83,7 +83,7 @@ def save_data(host, port, data):
 
 
 def retrieve_data(host, port, expiry=None):
-    """Retrieve the version stored for an arsenal 'host', if it's not stale.
+    """Retrieve the version stored for an cellar 'host', if it's not stale.
 
     Check to see if there is valid cached data for the host/port
     combination and return that if it isn't stale.

@@ -14,10 +14,10 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from arsenalclient.common import base
-from arsenalclient.common.i18n import _
-from arsenalclient.common import utils
-from arsenalclient import exc
+from cellarclient.common import base
+from cellarclient.common.i18n import _
+from cellarclient.common import utils
+from cellarclient import exc
 
 
 class Resource(base.Resource):
@@ -43,8 +43,8 @@ class ResourceManager(base.CreateManager):
             1) limit > 0, the maximum number of resource to return.
             2) limit == 0, return the entire list of resources.
             3) limit param is NOT specified (None), the number of items
-               returned respect the maximum imposed by the arsenal API
-               (see arsenal's api.max_limit option).
+               returned respect the maximum imposed by the cellar API
+               (see cellar's api.max_limit option).
 
         :param sort_key: Optional, field used for sorting.
 

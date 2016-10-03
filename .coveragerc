@@ -1,6 +1,6 @@
 [run]
 branch = True
-source = arsenalclient
+source = cellarclient
 
 [report]
 ignore_errors = True
