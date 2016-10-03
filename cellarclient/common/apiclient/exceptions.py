@@ -26,7 +26,7 @@ import sys
 import six
 
 from six.moves import http_client
-from arsenalclient.common.i18n import _
+from cellarclient.common.i18n import _
 
 class ClientException(Exception):
     """The base exception class for all exceptions this library raises."""

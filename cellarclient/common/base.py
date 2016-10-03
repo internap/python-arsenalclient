@@ -23,8 +23,8 @@ import six
 
 import six.moves.urllib.parse as urlparse
 
-from arsenalclient.common.apiclient import base
-from arsenalclient import exc
+from cellarclient.common.apiclient import base
+from cellarclient import exc
 
 
 def getid(obj):
@@ -101,8 +101,8 @@ class Manager(object):
                          limit=None):
         """Retrieve a list of items.
 
-        The arsenal API is configured to return a maximum number of
-        items per request, (see arsenal's api.max_limit option). This
+        The cellar API is configured to return a maximum number of
+        items per request, (see cellar's api.max_limit option). This
         iterates over the 'next' link (pagination) in the responses,
         to get the number of items specified by 'limit'. If 'limit'
         is None this function will continue pagination until there are

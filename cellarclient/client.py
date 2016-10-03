@@ -9,14 +9,14 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
-from arsenalclient.common import utils
+from cellarclient.common import utils
 
 
-def get_client(arsenal_url=None, max_retries=None,
+def get_client(cellar_url=None, max_retries=None,
                retry_interval=None, **ignored_kwargs):
     """
 
-    :param arsenal_url: arsenal API endpoint
+    :param cellar_url: cellar API endpoint
     :param max_retries: Maximum number of retries in case of conflict error
     :param retry_interval: Amount of time (in seconds) between retries in case
         of conflict error
@@ -27,7 +27,7 @@ def get_client(arsenal_url=None, max_retries=None,
         'max_retries': max_retries,
         'retry_interval': retry_interval,
     }
-    endpoint = arsenal_url
+    endpoint = cellar_url
 
     return Client('1', endpoint, **kwargs)
 

@@ -23,8 +23,8 @@ import shutil
 import sys
 import tempfile
 
-from arsenalclient import exc
-from arsenalclient.common.i18n import _
+from cellarclient import exc
+from cellarclient.common.i18n import _
 from oslo_utils import importutils
 from oslo_utils import strutils
 
@@ -70,7 +70,7 @@ def define_commands_from_module(subparsers, command_module, cmd_mapper):
 
 
 def import_versioned_module(version, submodule=None):
-    module = 'arsenalclient.v%s' % version
+    module = 'cellarclient.v%s' % version
     if submodule:
         module = '.'.join((module, submodule))
     return importutils.import_module(module)

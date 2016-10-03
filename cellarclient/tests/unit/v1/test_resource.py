@@ -18,9 +18,9 @@ import copy
 import testtools
 from testtools.matchers import HasLength
 
-from arsenalclient import exc
-from arsenalclient.tests.unit import utils
-import arsenalclient.v1.resource
+from cellarclient import exc
+from cellarclient.tests.unit import utils
+import cellarclient.v1.resource
 
 RESOURCE = {'id': 42,
            'uuid': 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee',
@@ -145,7 +145,7 @@ class ResourceManagerTest(testtools.TestCase):
     def setUp(self):
         super(ResourceManagerTest, self).setUp()
         self.api = utils.FakeAPI(fake_responses)
-        self.mgr = arsenalclient.v1.resource.ResourceManager(self.api)
+        self.mgr = cellarclient.v1.resource.ResourceManager(self.api)
 
     def test_resource_list(self):
         resource = self.mgr.list()
@@ -157,7 +157,7 @@ class ResourceManagerTest(testtools.TestCase):
 
     def test_resource_list_limit(self):
         self.api = utils.FakeAPI(fake_responses_pagination)
-        self.mgr = arsenalclient.v1.resource.ResourceManager(self.api)
+        self.mgr = cellarclient.v1.resource.ResourceManager(self.api)
         resource = self.mgr.list(limit=1)
         expect = [
             ('GET', '/v1/resources/?limit=1', {}, None),
@@ -167,7 +167,7 @@ class ResourceManagerTest(testtools.TestCase):
 
     def test_resource_list_marker(self):
         self.api = utils.FakeAPI(fake_responses_pagination)
-        self.mgr = arsenalclient.v1.resource.ResourceManager(self.api)
+        self.mgr = cellarclient.v1.resource.ResourceManager(self.api)
         resource = self.mgr.list(marker=RESOURCE['uuid'])
         expect = [
             ('GET', '/v1/resources/?marker=%s' % RESOURCE['uuid'], {}, None),
@@ -177,7 +177,7 @@ class ResourceManagerTest(testtools.TestCase):
 
     def test_resource_list_pagination_no_limit(self):
         self.api = utils.FakeAPI(fake_responses_pagination)
-        self.mgr = arsenalclient.v1.resource.ResourceManager(self.api)
+        self.mgr = cellarclient.v1.resource.ResourceManager(self.api)
         resource = self.mgr.list(limit=0)
         expect = [
             ('GET', '/v1/resources', {}, None),
@@ -188,7 +188,7 @@ class ResourceManagerTest(testtools.TestCase):
 
     def test_resource_list_sort_key(self):
         self.api = utils.FakeAPI(fake_responses_sorting)
-        self.mgr = arsenalclient.v1.resource.ResourceManager(self.api)
+        self.mgr = cellarclient.v1.resource.ResourceManager(self.api)
         resource = self.mgr.list(sort_key='updated_at')
         expect = [
             ('GET', '/v1/resources/?sort_key=updated_at', {}, None),
@@ -198,7 +198,7 @@ class ResourceManagerTest(testtools.TestCase):
 
     def test_resource_list_sort_dir(self):
         self.api = utils.FakeAPI(fake_responses_sorting)
-        self.mgr = arsenalclient.v1.resource.ResourceManager(self.api)
+        self.mgr = cellarclient.v1.resource.ResourceManager(self.api)
         resource = self.mgr.list(sort_dir='desc')
         expect = [
             ('GET', '/v1/resources/?sort_dir=desc', {}, None),

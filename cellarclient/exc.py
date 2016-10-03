@@ -10,8 +10,8 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from arsenalclient.common.apiclient import exceptions
-from arsenalclient.common.apiclient.exceptions import *  # noqa
+from cellarclient.common.apiclient import exceptions
+from cellarclient.common.apiclient.exceptions import *  # noqa
 
 
 # NOTE(akurilin): This alias is left here since v.0.1.3 to support backwards

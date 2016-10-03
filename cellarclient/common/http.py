@@ -23,14 +23,14 @@ import time
 import requests
 import six
 import six.moves.urllib.parse as urlparse
-from arsenalclient import exc
-from arsenalclient.common.i18n import _
-from arsenalclient.common.i18n import _LE
+from cellarclient import exc
+from cellarclient.common.i18n import _
+from cellarclient.common.i18n import _LE
 from oslo_utils import strutils
 from six.moves import http_client
 
 LOG = logging.getLogger(__name__)
-USER_AGENT = 'python-arsenalclient'
+USER_AGENT = 'python-cellarclient'
 CHUNKSIZE = 1024 * 64  # 64kB
 DEFAULT_VER = '1'
 
@@ -84,7 +84,7 @@ def with_retries(func):
             try:
                 return func(self, url, method, **kwargs)
             except _RETRY_EXCEPTIONS as error:
-                msg = (_LE("Error contacting Arsenal server: %(error)s. "
+                msg = (_LE("Error contacting Cellar server: %(error)s. "
                            "Attempt %(attempt)d of %(total)d") %
                        {'attempt': attempt,
                         'total': num_attempts,
@@ -229,7 +229,7 @@ class HTTPClient():
 
             if resp.status_code == http_client.NOT_ACCEPTABLE:
                 negotiated_ver = self.negotiate_version(self.session, resp)
-                kwargs['headers']['X-OpenStack-Arsenal-API-Version'] = (
+                kwargs['headers']['X-OpenStack-Cellar-API-Version'] = (
                     negotiated_ver)
                 return self._http_request(url, method, **kwargs)
 

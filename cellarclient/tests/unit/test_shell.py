@@ -14,9 +14,9 @@ import re
 import sys
 
 import six
-from arsenalclient import exc
-from arsenalclient import shell as arsenal_shell
-from arsenalclient.tests.unit import utils
+from cellarclient import exc
+from cellarclient import shell as cellar_shell
+from cellarclient.tests.unit import utils
 from testtools import matchers
 
 BASE_URL = 'http://no.where:5000'
@@ -32,7 +32,7 @@ class ShellTest(utils.BaseTestCase):
         orig = sys.stdout
         try:
             sys.stdout = six.StringIO()
-            _shell = arsenal_shell.ArsenalShell()
+            _shell = cellar_shell.CellarShell()
             _shell.main(argstr.split())
         except SystemExit:
             exc_type, exc_value, exc_traceback = sys.exc_info()
@@ -48,8 +48,8 @@ class ShellTest(utils.BaseTestCase):
 
     def test_help(self):
         required = [
-            '.*?^usage: arsenal',
-            '.*?^See "arsenal help COMMAND" '
+            '.*?^usage: cellar',
+            '.*?^See "cellar help COMMAND" '
             'for help on a specific command',
         ]
         for argstr in ['--help', 'help']:
@@ -61,7 +61,7 @@ class ShellTest(utils.BaseTestCase):
 
     def test_help_on_subcommand(self):
         required = [
-            '.*?^usage: arsenal resource-show',
+            '.*?^usage: cellar resource-show',
             ".*?^Show detailed information about a resource",
         ]
         argstrings = [
